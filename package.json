@@ -1,0 +1,22 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "React course",
+  "homepage": "https://github.com/rakesh17jeremy/react-namaste#readme",
+  "bugs": {
+    "url": "https://github.com/rakesh17jeremy/react-namaste/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakesh17jeremy/react-namaste.git"
+  },
+  "license": "ISC",
+  "author": "Rakesh",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
