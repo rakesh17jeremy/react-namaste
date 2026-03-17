@@ -14,9 +14,17 @@
   "author": "Rakesh",
   "type": "commonjs",
   "scripts": {
+    "start": "parcel index.html",
     "test": "jest"
   },
   "devDependencies": {
     "parcel": "^2.16.4"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   }
 }
