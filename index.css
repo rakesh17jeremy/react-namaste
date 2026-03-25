@@ -1,0 +1,55 @@
+.head-container{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    border: 1px solid black;
+
+}
+/* .mainDiv{
+    background-image: url("https://www.crazypunch.com/wp-content/uploads/2024/01/bloody-sweet-222-scaled-1.jpg");
+     position:relative;
+} */
+.title{
+    font-size: 50PX;
+    font-family:cursive;
+    color: #e69500;
+}
+.img-logo{
+    width: 150px;
+}
+
+.list {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+.list > li{
+    font-size:x-large;
+    margin: 5px;
+    padding: 10px;
+}
+.search{
+    padding-left: 5%;
+}
+.fa-search{
+    margin: 5px;
+}
+
+.res-card{
+    margin: 5px;
+    padding: 5px;
+    width: 18.5%;
+    
+}
+.res-card:hover{
+    border: 1px solid #e69500;
+    cursor: pointer;
+    
+}
+.res-kgf{
+    width: 100%;
+}
+.div-body{
+    display: flex;
+    flex-wrap: wrap;
+}
