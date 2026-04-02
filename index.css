@@ -38,7 +38,8 @@
 .res-card{
     margin: 5px;
     padding: 5px;
-    width: 18.5%;
+    height: 5%;
+    width:15%;
     
 }
 .res-card:hover{
@@ -46,8 +47,9 @@
     cursor: pointer;
     
 }
-.res-kgf{
-    width: 100%;
+.res-img{
+    width:100%;
+    height:100%;
 }
 .div-body{
     display: flex;
