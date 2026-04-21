@@ -22,36 +22,59 @@
     display: flex;
     align-items: center;
     list-style-type: none;
+    padding: 10px;
 }
 .list > li{
     font-size:x-large;
     margin: 5px;
     padding: 10px;
 }
-.search{
-    padding-left: 5%;
-}
-.fa-search{
-    margin: 5px;
-}
 
 .res-card{
     margin: 5px;
     padding: 5px;
-    height: 5%;
-    width:15%;
+    height: auto;
+    width:18%;
+    background-color: #f0f0f0;
     
 }
 .res-card:hover{
-    border: 1px solid #e69500;
-    cursor: pointer;
+    border: 2px solid #e69500;
+    cursor:pointer;
     
 }
 .res-img{
     width:100%;
     height:100%;
+    aspect-ratio: 1/1;
+    object-fit:cover;
+    
 }
-.div-body{
+.div-res{
     display: flex;
     flex-wrap: wrap;
+    padding: 0 45px;
+}
+.shim-container{
+    display:flex;
+    flex-wrap: wrap;
+    padding: 0 50px 0 50px;
+}
+.shim{
+    margin: 10px;
+    height: 300px;
+    width:18%;
+    background-color: #f0f0f0;
+    
+}
+.btn-card{
+    display: flex;
+}
+.div-body{
+     margin: 10px;
+     display:flex;
+}
+.div-body > button {
+    padding: 0px 10px;
+    margin: 3px;
 }

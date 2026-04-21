@@ -1,21 +1,23 @@
 import ResCard from "./Restaurant";
 import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
-import Shimmer from "./Shimmer"
+import Shimmer from "./Shimmer";
 
 const search = (
   <div className="search">
     <input type="text" placeholder="Search Here"></input>
-    <i className="fa fa-search"></i>
+    <button>Search</button>
   </div>
 );
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
+  const [filteredListOfRes, setFilteredListOfRes] = useState([]);
+  const [search, setSearch] = useState("");
 
-   useEffect(()=>{
+  useEffect(() => {
     fetchApi();
-   }, []);
+  }, []);
 
   const fetchApi = async () => {
     const data = await fetch(
@@ -23,30 +25,58 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+    
 
-    setListOfRes(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setListOfRes(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
+    );
+    console.log(listOfRes);
+    setFilteredListOfRes(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants,
+    );
   };
 
-  if(listOfRes.length ===0 ){
-    return <Shimmer />
+  if (listOfRes.length === 0) {
+    return <Shimmer />;
   }
 
   return (
     <div>
-      <div style={{ margin: "10px" }}>
-        <button 
+      <div className="div-body">
+        <input
+          type="text"
+          placeholder="Search Here"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        ></input>
+        <button
           onClick={() => {
-            const filterRes = listOfRes.filter((obj) => obj.info.avgRating > 4.3);
+            const searchRes = listOfRes.filter((res) =>
+              res.info.name.toLowerCase().includes(search.toLowerCase()),
+            );
+            setFilteredListOfRes(searchRes);
+          }}
+        >
+          Search
+        </button>
+        <button
+          onClick={() => {
+            const filterRes = listOfRes.filter(
+              (obj) => obj.info.avgRating > 4.3,
+            );
             console.log(filterRes);
-            setListOfRes(filterRes);
+            setFilteredListOfRes(filterRes);
           }}
         >
           Top Restaurants
         </button>
       </div>
-      <div className="div-body">
-        {listOfRes.map((restaurant) => (
+      <div className="div-res">
+        {filteredListOfRes.map((restaurant) => (
           <ResCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
