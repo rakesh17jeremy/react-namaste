@@ -1,14 +1,15 @@
 import ResCard from "./Restaurant";
-import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
-import Shimmer from "./Shimmer";
+import { RES_API } from "../utils/constants";
+import { Link } from "react-router-dom";
+import Reload from "./Shimmer";
 
-const search = (
-  <div className="search">
-    <input type="text" placeholder="Search Here"></input>
-    <button>Search</button>
-  </div>
-);
+// const search = (
+//   <div className="search">
+//     <input type="text" placeholder="Search Here"></input>
+//     <button>Search</button>
+//   </div>
+// );
 
 const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
@@ -20,26 +21,42 @@ const Body = () => {
   }, []);
 
   const fetchApi = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9653652&lng=80.2461057&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
-    );
+    const data = await fetch(RES_API);
+
+    // const data = await fetch(
+    //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9653652&lng=80.2461057&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+    // );
+
+    // const data = await fetch(
+    //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.3841125&lng=77.6645156&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+    // );
 
     const json = await data.json();
-    
 
     setListOfRes(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants,
     );
-    console.log(listOfRes);
+
     setFilteredListOfRes(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants,
     );
   };
 
+  const searchFunctionality = () => {
+    const searchRes = listOfRes.filter(
+      (res) =>
+        res.info.name.toLowerCase().includes(search.toLowerCase()) ||
+        res.info.cuisines.forEach((s) => {
+          s.toLowerCase().includes(search.toLowerCase());
+        }),
+    );
+    setFilteredListOfRes(searchRes);
+  };
+
   if (listOfRes.length === 0) {
-    return <Shimmer />;
+    return <Reload />;
   }
 
   return (
@@ -53,20 +70,24 @@ const Body = () => {
             setSearch(e.target.value);
           }}
         ></input>
-        <button
-          onClick={() => {
-            const searchRes = listOfRes.filter((res) =>
-              res.info.name.toLowerCase().includes(search.toLowerCase()),
-            );
-            setFilteredListOfRes(searchRes);
-          }}
-        >
+
+        <button id="searchBox" onClick={searchFunctionality}>
           Search
         </button>
+
+        <button
+          onClick={() => {
+            setFilteredListOfRes(listOfRes);
+            setSearch("");
+          }}
+        >
+          Back
+        </button>
+
         <button
           onClick={() => {
             const filterRes = listOfRes.filter(
-              (obj) => obj.info.avgRating > 4.3,
+              (obj) => obj.info.avgRating > 4.2,
             );
             console.log(filterRes);
             setFilteredListOfRes(filterRes);
@@ -75,9 +96,16 @@ const Body = () => {
           Top Restaurants
         </button>
       </div>
+
       <div className="div-res">
         {filteredListOfRes.map((restaurant) => (
-          <ResCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            key={restaurant.info.id}
+            className="link"
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <ResCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
