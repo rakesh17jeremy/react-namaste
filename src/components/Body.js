@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { RES_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 import Reload from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // const search = (
 //   <div className="search">
@@ -54,6 +55,9 @@ const Body = () => {
     );
     setFilteredListOfRes(searchRes);
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) return <h1>You are offline!! Please try again later</h1>;
 
   if (listOfRes.length === 0) {
     return <Reload />;

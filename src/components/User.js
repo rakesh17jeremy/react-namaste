@@ -1,34 +1,61 @@
 import React from "react";
 
-class User extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            count: 0, 
-        }
-        console.log(this.props.name+"Child Constructor")
-    } // we can define without a constructor as react creates its own constructor by default
-     
-    componentDidMount(){
-        console.log(this.props.name+"Child comp did mount");
-    }
-    render(){
-        const {name, location} = this.props;
-        const {count} =this.state;
-        console.log(name+"Child Render")
+class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      userInfo: {
+        login: "default",
+        id: "default",
+      },
+    };
 
-        return <div className="user-card">
-            <h2>{name}</h2>
-            <h3>{location}</h3>
-            <p>Count : {count}</p> 
-            <button onClick={()=>{
-                this.setState({
-                    count:count +1,
-                })
-            }}>Increment</button>
-        </div>
-    }
+    console.log("Child Constructor");
+  } // we can define without a constructor as react creates its own constructor by default
 
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/rakesh17jeremy");
+    const json = await data.json();
+
+    this.setState({
+      userInfo: json,
+    });
+
+    console.log("Child comp did mount");
+  }
+
+  componentDidUpdate() {
+    console.log("Child Update");
+  }
+
+  componentWillUnmount() {
+    console.log("Child Unmount");
+  }
+
+  render() {
+    const { login, id, type } = this.state.userInfo;
+    const { count } = this.state;
+    console.log("Child Render");
+
+    return (
+      <div className="user-card">
+        <h3>{login}</h3>
+        <h4>{id}</h4>
+        <h4>{type}</h4> 
+        <p>Count : {count}</p>
+        <button
+          onClick={() => {
+            this.setState({
+              count: count + 1,
+            });
+          }}
+        >
+          Increment
+        </button>
+      </div>
+    );
+  }
 }
 
 export default User;

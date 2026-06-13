@@ -35,8 +35,8 @@
 }
 
 .res-card{
-    margin: 5px;
-    padding: 7px;
+    margin: 4px;
+    padding: 9px;
     height: auto;
     width:auto;
     background-color: #f0f0f0;
@@ -57,8 +57,8 @@
 
 .div-res{
     display: flex;
-    flex-wrap:inherit;
-    padding: 0 45px;
+    flex-wrap:unset;
+    padding: 0 40px;
 }
 
 .shim-container{

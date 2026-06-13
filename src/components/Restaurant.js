@@ -2,7 +2,9 @@ import { RES_IMG_URL } from "../utils/constants";
 
 const ResCard = (props) => {
   const { resData } = props;
-  const { name, avgRating, locality, cloudinaryImageId, cuisines, areaName} = resData?.info;
+  const { name, avgRating, locality, cloudinaryImageId, cuisines, areaName } =
+    resData?.info;
+
   return (
     <div className="res-card">
       <div>

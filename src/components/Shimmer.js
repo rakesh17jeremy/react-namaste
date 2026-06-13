@@ -1,6 +1,5 @@
 const Reload = () => {
   return (
-   
     <div className="shim-container">
       <div className="shim"></div>
       <div className="shim"></div>
@@ -14,7 +13,6 @@ const Reload = () => {
       <div className="shim"></div>
       <div className="shim"></div>
     </div>
-   
   );
 };
 
