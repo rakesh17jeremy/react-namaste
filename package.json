@@ -14,7 +14,7 @@
   "author": "Rakesh",
   "type": "commonjs",
   "scripts": {
-    "start": "parcel index.html",
+    "start:dev": "parcel index.html",
     "test": "jest"
   },
   "devDependencies": {
@@ -24,8 +24,10 @@
     "last 2 versions"
   ],
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^6.22.0"
+    "react-router-dom": "^6.22.0",
+    "tailwindcss": "^4.3.1"
   }
 }
