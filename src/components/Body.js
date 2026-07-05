@@ -1,9 +1,10 @@
 import ResCard, { withPromoted } from "./Restaurant";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RES_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 import Reload from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 // const search = (
 //   <div className="search">
@@ -16,6 +17,7 @@ const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [filteredListOfRes, setFilteredListOfRes] = useState([]);
   const [search, setSearch] = useState("");
+  const { userLoggedIn, setUserInfo } = useContext(UserContext);
 
   useEffect(() => {
     fetchApi();
@@ -73,9 +75,9 @@ const Body = () => {
       <div className="flex justify-between bg-gray-600 px-1 border-b shadow-amber-300">
         <div className="flex p-2">
           <input
-            className="border border-orange-500 rounded-3xl my-2 mx-1 text-white"
+            className="border border-orange-500 rounded-3xl my-2 mx-1 px-2 text-white"
             type="text"
-            placeholder="       Search Here"
+            placeholder=" Search Here"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -125,6 +127,13 @@ const Body = () => {
           >
             Top Restaurants
           </button>
+
+          <label className="text-white text-center p-2 my-2">UserName : </label>
+          <input
+            className="border border-orange-500 p-2 m-1 shadow-2xs rounded-2xl text-white"
+            value={userLoggedIn}
+            onChange={(e) => setUserInfo(e.target.value)}
+          ></input>
         </div>
         <div className="m-3">
           <Link to="/grocery" className="pointer text-white px-3 bold text-3xl">
@@ -133,20 +142,25 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="m-4 px-4 flex flex-wrap">
-        {filteredListOfRes.map((restaurant) => (
-          <Link
-            key={restaurant.info.id}
-            className="link"
-            to={"/restaurant/" + restaurant.info.id}
-          >
-            {restaurant.info.avgRating < 4.3 ? (
-              <PromotedRestaurant resData={restaurant} />
-            ) : (
-              <ResCard resData={restaurant} />
-            )}
-          </Link>
-        ))}
+      <div className="m-4 px-4 ">
+        {/* <div>
+          <h3 className="w-6/12 m-auto">Welcome {userLoggedIn} </h3>
+        </div> */}
+        <div className="flex flex-wrap">
+          {filteredListOfRes.map((restaurant) => (
+            <Link
+              key={restaurant.info.id}
+              className="link"
+              to={"/restaurant/" + restaurant.info.id}
+            >
+              {restaurant.info.avgRating < 4.3 ? (
+                <PromotedRestaurant resData={restaurant} />
+              ) : (
+                <ResCard resData={restaurant} />
+              )}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
