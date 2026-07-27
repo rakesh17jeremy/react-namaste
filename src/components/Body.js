@@ -33,7 +33,6 @@ const Body = () => {
     // const data = await fetch(
     //   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.3841125&lng=77.6645156&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     // );
-
     const json = await data.json();
 
     setListOfRes(
@@ -47,7 +46,7 @@ const Body = () => {
     );
   };
 
-  console.log(listOfRes);
+  // console.log(listOfRes);
 
   const searchFunctionality = () => {
     const searchRes = listOfRes.filter(
@@ -75,9 +74,9 @@ const Body = () => {
       <div className="flex justify-between bg-gray-600 px-1 border-b shadow-amber-300">
         <div className="flex p-2">
           <input
-            className="border border-orange-500 rounded-3xl my-2 mx-1 px-2 text-white"
+            className="border border-orange-500 rounded-3xl my-2 mx-1 px-3 text-white"
             type="text"
-            placeholder=" Search Here"
+            placeholder="Search Here"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -87,6 +86,7 @@ const Body = () => {
           <button
             type="submit"
             className="m-1 inline-flex items-center rounded-xl border border-orange-400 justify-center shrink-0 text-white focus:ring-4 focus:ring-brand-medium shadow-xs rounded-base w-10 h-10 focus:outline-none"
+            data-testid="searchBtn"
             onClick={searchFunctionality}
           >
             <svg
